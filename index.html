@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		// 时间差 = 目标时间 - 现在时间
+		// 1.创建目标时间
+		var target = new Date('2022/12/25'); // Sat Oct 01 2022 00:00:00
+
+		// 提前调用一次函数，弥补时间空白
+		auto();
+
+		setInterval(auto, 1000);
+		function auto() {
+			// 2.创建现在时间
+			var now = new Date();
+
+			// 3. 时间差 = 目标时间 - 现在时间
+			var time = Math.floor((target - now) / 1000); // 是毫秒
+
+			// 4.计算天
+			var day = parseInt(time / 86400); // 24*60*60=86400(一天的秒数)
+			console.log(day);
+
+			// 5.计算小时：不够一天的秒数计算小时
+			var h = parseInt(time % 86400 / 3600);
+			console.log(h);
+
+			// 6.计算分钟：不够一小时的秒数计算分钟
+			var min = parseInt(time % 3600 / 60);
+			console.log(min);
+
+			// 7.计算秒数：不够一分钟的就是秒数
+			var s = time % 60;
+			console.log(s);
+			
+
+			document.body.innerHTML = '距离2022年下半年研究生考试还有' + fullZero(day) + '天' + fullZero(h) + '小时' + fullZero(min) + '分钟' + fullZero(s) + '秒';
+		}
+
+		// 补0函数
+		function fullZero(n){
+			n = n < 10 ? '0'+n : n;
+			// 返回处理好的数据
+			return n;
+		}
+
+	</script>
+</body>
+
+</html>
